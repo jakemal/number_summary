@@ -1,8 +1,21 @@
 require_relative 'number_summary'
 
-a = (1..6).map { |i| i }
-print a, "\n"
+array = []
 
-print NumberSummary.mode(a), "\n"
+file = File.open("data.csv", 'r')
+file.each_line do |line|
+	array = line.split(',')
+end
 
-puts NumberSummary.summarize('data.csv')
+b = array.collect do |value| 
+  value.to_f 
+end
+
+
+print NumberSummary.max(b), "\n"
+
+print NumberSummary.min(b), "\n"
+
+print NumberSummary.mean(b), "\n"
+
+print NumberSummary.median(b), "\n"
