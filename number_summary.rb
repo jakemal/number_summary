@@ -3,69 +3,113 @@
 class NumberSummary
 	
 	class << self
-	
-		def max(max_array)
-			max = 0
-			max_array.each do |element|
-				if element > max 
-					max = element
-				end
-			end
-			 max
+
+		def max(array)
+			array.max
 		end
 
-		def min(min_array)
-			min = 20
-			min_array.each do |element|
-				if element < min 
-					min = element
-				end
-			end
-			 min
-		end	
+		def min(array)
+			array.min
+		end
 
 		def mean(array)
-			sum = 0
-			array.each do |n| (sum += n)
+			sum = 0.0 
+			for i in 1..array.length
+				sum += array[i-1].to_f
 			end
-			m = ((sum/ array.length).round(1))
+			(sum / array.length).round(1)
 		end
 
-		def median(median_array)
-			a = median_array.sort_by(&:to_i)
-			middle = a.length / 2
-			if middle.is_a? Integer 
-				middle = middle
+		def median(array)
+			a = array.sort
+			if a.length % 2 == 0
+				(a[a.length / 2].to_f + a[(a.length / 2) - 1].to_f) / 2
 			else
-				upper_no = middle.ceil
-				lower_no = middle.floor
-				middle = (upper_no + lower_no)/2
+				a[a.length / 2].to_f
 			end
-			middle_no = median_array[middle]
-			puts middle_no
 		end
 
 		def mode(array)
-		var = 0
-		mode = 0
-		prevVar = 0
-		array.each do |i|
-			array.each do |n|
-				if i == n
-					var += 1
-					mode = n if var > prevVar
-					prevVar = var
+			max = 0
+			array_uni = array.sort.uniq
+			array_count = []
+			array_final = []
+			(0...array_uni.length).each do |n|
+				array_count.push(0)
+			end
+			(0...array.length).each do |n|
+				(0...array_uni.length).each do |x|
+					if array_uni[x] == array[n]
+						array_count[x] += 1
+					end
 				end
 			end
-			var = 0
+			max = array_count.max
+			(0...array_count.length).each do |n|
+				if array_count[n] == max
+					array_final.push(array_uni[n])
+				end
+			end
+			array_final
 		end
-		puts mode
-	end
 
-	def data_summary()
-		puts "This is your data summary:"
-		puts "Maximum number: #{max} \n"
-	end
- 
+		def q1(a)
+			array = a.sort
+			if array.length % 2 == 0
+				new_arr = array[0..(array.length/2) - 1]
+				if new_arr.length % 2 == 0
+					(new_arr[new_arr.length / 2].to_f + new_arr[(new_arr.length / 2) - 1].to_f) / 2
+				else
+					new_arr[((new_arr.length + 1) / 2) - 1]
+				end
+			else
+				new_arr = array[0..((array.length + 1) / 2) - 2]
+				if new_arr.length % 2 == 0
+					(new_arr[new_arr.length / 2].to_f + new_arr[(new_arr.length / 2) - 1].to_f) / 2
+				else
+					new_arr[((new_arr.length + 1) / 2) - 1]
+				end
+			end
+		end
+
+		def q3(a)
+			array = a.sort
+			if array.length % 2 == 0
+				new_arr = array[(array.length/2)..array.length]
+				if new_arr.length % 2 == 0
+					(new_arr[new_arr.length / 2].to_f + new_arr[(new_arr.length / 2) - 1].to_f) / 2
+				else
+					new_arr[((new_arr.length + 1) / 2) - 1]
+				end
+			else
+				new_arr = array[((array.length + 1)/2)..array.length]
+				if new_arr.length % 2 == 0
+					(new_arr[new_arr.length / 2].to_f + new_arr[(new_arr.length / 2) - 1].to_f) / 2
+				else
+					new_arr[((new_arr.length + 1) / 2) - 1]
+				end
+			end
+		end
+
+	
+
+		def summarize(file)
+			file = File.open(file, "r")
+			data = file.read
+
+			a = data.split(",")
+			
+			puts "Number Summary:"
+			puts "min: " + min(a).to_s
+			puts "max: " + max(a).to_s
+			puts "mean: " + mean(a).to_s
+			puts "median: " + median(a).to_s
+			puts "q1: " + q1(a).to_s
+			puts "q3: " + q3(a).to_s
+			puts "mode: " + mode(a).to_s
+			puts "sigma: " + sigma(a).to_s
+			Math.sqrt(newSum / array.length)
+		end
+
 	end
 end
