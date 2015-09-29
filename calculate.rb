@@ -18,4 +18,8 @@ print NumberSummary.min(b), "\n"
 
 print NumberSummary.mean(b), "\n"
 
-print NumberSummary.median(b), "\n"
+print NumberSummary.median(b) 
+
+print NumberSummary.mode(b), "\n"
+
+print NumberSummary.data_summary("data.csv"), "\n"

@@ -45,8 +45,27 @@ class NumberSummary
 			puts middle_no
 		end
 
-		def mode
+		def mode(array)
+		var = 0
+		mode = 0
+		prevVar = 0
+		array.each do |i|
+			array.each do |n|
+				if i == n
+					var += 1
+					mode = n if var > prevVar
+					prevVar = var
+				end
+			end
+			var = 0
+		end
+		puts mode
+	end
 
-		end 
+	def data_summary()
+		puts "This is your data summary:"
+		puts "Maximum number: #{max} \n"
+	end
+ 
 	end
 end

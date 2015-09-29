@@ -39,4 +39,9 @@ module NumberSummaryTests
 		assert_equal 3, NumberSummary.mode([3,6,3,3])
 		assert_equal 4, NumberSummary.mode([4,4,4,4])
 	end
+	def test_data_summary
+		assert_equal , NumberSummary.data_summary([])
+		assert_equal , NumberSummary.data_summary([])
+		assert_equal , NumberSummary.data_summary([])
+	end
 end
